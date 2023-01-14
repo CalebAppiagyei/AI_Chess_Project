@@ -7,6 +7,8 @@ Date: 1/10/23
 Description: Creating a playable chess ai
 '''
 
+# MINMAX WITHOUT RECURSION
+
 import random
 import numpy as np
 
