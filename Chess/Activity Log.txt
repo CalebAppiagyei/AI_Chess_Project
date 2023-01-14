@@ -1,0 +1,87 @@
+Activity Log:
+
+12/26/22:
+Created board and pieces. Was able to generate the board with the pieces in the correct spots.
+Also chose color of the board. Decided to use a numpy array to represent the board for efficiency 
+purposes. Was not able to import the full Chess Engine program into chess main so I instead just 
+imported the gamestate class by itself. The pieces do not move yet.
+
+12/27/22:
+Made it possible to move the pieces. Have not yet determined whether the moves are valid yet.
+They should however, be able to go on a turn by turn basis. Was able to use rank-file notation
+to represent coordinates on the board. 
+
+12/28/22:
+Added an undo move function that undoes any move made during the game. This function can go all the 
+way back to the start of the match. Began process of making sure the moves are valid. The game is 
+currently not playable because I have not implemented the generation of valid moves.
+
+12/29/22:
+In the process of creating valid moves for the pawns I ran into an issue of being able to make a move
+after undoing a move. I was able to fix the issue by altering code in the else if statement 
+(e.type == p.KEYDOWN), instead of having the line "moveMade = True", I changed it to
+"validMoves = gameState.getValidMoves." This seemed to fix the issue but I am unsure why. 
+I was able to find the issue and realize that when the type error 
+(TypeError: argument of type 'method' is not iterable) appears it probably means that you were missing
+opening and closing parenthese for a function call. I fixed the method call in the if statement that used
+the moveMade variable and reverted the previously changes line back to how it was before.
+Today I generated all of the possible pawn moves for the White and Black pawns on the board. They are able
+to capture diagonally as well. I have not yet added the en passant rule for pawns yet.
+
+12/30/22:
+Found bug for the black pawns that they were not able to take pawns to their right. Eventually fixed the bug,
+the if statement was missing its call to the first character in the string of the piece.
+Finished the getRookMoves, getKnightMoves, and getKingMoves functions.
+Ran into an issue when beginning to write the getBishopMoves function. After writing the code for when the 
+white bishop would be moving to the top left I attempted to test the code by running chess main. However, for
+some reason the pygame window would stop responding and freeze when attempting to use certain black pawns. This
+issue went away when I commented out the code that I wrote for the bishop. After debugging, it does not say there
+are any errors and I do not see an error message while running the program.
+*For future use, I can simply call both getBishopMoves and getRookMoves in the getQueenMoves function instead of 
+writing code for the function*
+
+12/31/22:
+Went with a shorter and more efficient function for getBishopMoves which seems to have solved the problem.
+Could potentially change the getRookMoves function to a solution that is similar to getBishopMoves so that 
+there is less code and it is more efficient. I also called both getRookMovesand getBishopMoves in 
+getQueenMoves and was able to complete that as well.
+
+1/1/23:
+Using naive solution to handle checks and invalid moves. Created check and stale mate variables. Made certain moves
+invalid when the king is in check, meaning that the user must make a move to get the king out of check.
+
+1/2/23:
+Identified a bug involving the switching of turns. The game allows both sides to make 2 seperate moves when it is 
+their turn for the third time. Found that I was missing a swap turns statement in the makeMove function. Succesfully
+added pawn promotion (automatically switches to a queen for now). Implemented the en passant rule.
+
+1/5/23:
+Began adding castling to the game. Ran into a bug when castling to the right where the rook would be copied to its new
+position however it would not be removed from its starting position. There is also a bug for undoing a castle move where
+once the castle move is undone you can no longer castle afterwards. Also found and fixed a bug that was unrelated to today's
+work. There was an issue with the undeMove function where you would receive an error for trying to undo a move once the board
+reaches its starting point.
+
+1/6/23:
+Found that the bug that has to do with undoing a move applies to any move not just a castle move.
+Fixed the king side castling bug.
+
+1/8/23:
+Fixed castling bug that occured once the user undoes a move. Began highlighting the squares that the user selects and the possible
+moves. Found bug with bishops moves that allows the bishop to move even with ally pieces in their path. Found the issue with the 
+bishop moves and corrected it. Added a highlight feature for the previous move that was made. Added a feature that will reset the 
+board once the r key is pressed. Added end of game text with different messages for a checkmate or stalemate.
+
+1/10/23:
+Implemented a chess ai that simply chooses a random move and makes that move.
+
+1/11/23:
+Attempted to apply tensorflow and stockfish similarly to how it was used in an article online but failed. I am thinking that I 
+should instead try and come up with my own original method. Possibly pass the valid moves as a parameter and allow the ai to 
+check every move.
+Implemented a "greedy" algorithm that will capture a piece whenever it has a chance even if it puts the capturing piece in danger.
+
+1/12/23:
+Implemented a MinMax algorithm that the ai uses to make a move. The ai uses a score system to rate the board and also looks 2 moves 
+ahead as of right now. Added to the score system and had it factor in the locations of the pieces to overall board score.
+
