@@ -85,6 +85,7 @@ def main():
                     gameState.undoMove()
                     moveMade = True
                     animate = False
+                    gameOver = False
                 if e.key == p.K_r: # Reset the board when the user presses 'r'
                     gameState = GameState()
                     validMoves = gameState.getValidMoves
@@ -92,6 +93,7 @@ def main():
                     playerClicks = []
                     moveMade = False
                     animate = False
+                    gameOver = False
         # AI move logic
         if not gameOver and not humanTurn:
             aiMove = ChessBot.findBestMove(gameState, gameState.getValidMoves()) # Allowing the ai to choose a move
