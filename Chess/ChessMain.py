@@ -9,6 +9,8 @@ and displaying the current GameState object
 Inspiration: Eddie Sharick (Youtube)
 '''
 
+# MINMAX WITHOUT RECURSION
+
 import pygame as p
 from ChessEngine import GameState
 from ChessEngine import Move
