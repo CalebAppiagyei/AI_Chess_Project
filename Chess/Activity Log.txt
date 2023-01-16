@@ -85,3 +85,7 @@ Implemented a "greedy" algorithm that will capture a piece whenever it has a cha
 Implemented a MinMax algorithm that the ai uses to make a move. The ai uses a score system to rate the board and also looks 2 moves 
 ahead as of right now. Added to the score system and had it factor in the locations of the pieces to overall board score.
 
+1/14/23:
+Implemented MinMax algorithm but with recursion. This allows the ai to look further into potential game scenarios without me having 
+to lengthen the code. Using the DEPTH variable, I am able to choose how far ahead I would like the ai to look when choosing a move.
+

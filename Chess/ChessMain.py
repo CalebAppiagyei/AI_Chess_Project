@@ -9,8 +9,6 @@ and displaying the current GameState object
 Inspiration: Eddie Sharick (Youtube)
 '''
 
-# MINMAX WITHOUT RECURSION
-
 import pygame as p
 from ChessEngine import GameState
 from ChessEngine import Move
@@ -51,7 +49,7 @@ def main():
     squareSelected = () # Keeps track of the last click from the user in a tuple (row, coloumn)
     playerClicks = [] # Keep track of player clicks (two tuples[(6,4), (4,4)])
     humanPlaying = False # When the human is playing 
-    botPlaying = False # When the chessBot is playing
+    botPlaying = False # When the chessBot is not playing
     while running:
         humanTurn = (gameState.whiteToMove and humanPlaying) or (not gameState.whiteToMove and botPlaying) # It is the human's turn when it is white's turn to move
         for e in p.event.get():
@@ -98,7 +96,7 @@ def main():
                     gameOver = False
         # AI move logic
         if not gameOver and not humanTurn:
-            aiMove = ChessBot.findBestMove(gameState, gameState.getValidMoves()) # Allowing the ai to choose a move
+            aiMove = ChessBot.findBestMoveMinMax(gameState, gameState.getValidMoves()) # Allowing the ai to choose a move
             if aiMove is None:
                 aiMove = ChessBot.findRandomMove(gameState.getValidMoves()) # The ai will choose a random move if it does not find a best move
             gameState.makeMove(aiMove)
